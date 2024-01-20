@@ -1,28 +1,14 @@
 
 
 
-
 // strats here
-const loadRepo = async (searchText='binitaepa', isShowAll) => {
-    console.log(searchText)
-    console.log(isShowAll)
-    var request = new XMLHttpRequest()
-
-    // Open a new connection, using the GET request on the URL endpoint
-    request.open('GET', `https://api.github.com/users/${searchText}/repos`, true)
-    
-    request.onload = function () {
-      // Begin accessing JSON data here
-      var data = JSON.parse(this.response);
-    console.log(data)
-     displayRepo(data,isShowAll)
-    }
-    
-    // Send request
-    request.send();
-   
+const loadRepo =  async(searchText='binitaepa', isShowAll) => {
+   console.log(isShowAll)
+    const res = await fetch(`https://api.github.com/users/${searchText}/repos`);
+    const data = await res.json();
+    displayRepo(data,isShowAll)
 }
-const avatarRepo = async (searchText='binitaepa',isShowAll) => {
+const avatarRepo =  (searchText='binitaepa') => {
     console.log(searchText)
     var request = new XMLHttpRequest()
 
@@ -32,15 +18,15 @@ const avatarRepo = async (searchText='binitaepa',isShowAll) => {
     request.onload = function () {
       // Begin accessing JSON data here
       var data = JSON.parse(this.response);
-    console.log(data)
-     displayName(data,isShowAll)
+    // console.log(data)
+     displayName(data)
     }
     
     // Send request
     request.send();
    
 }
-const displayName=(data,isShowAll)=>{
+const displayName=(data)=>{
     const avatar=document.getElementById('avatar');
     // clear serach container repo before adding new cards
     avatar.textContent = '';
@@ -76,7 +62,7 @@ const displayName=(data,isShowAll)=>{
 
 const displayRepo = (data, isShowAll) => {
     // console.log(data)
-
+// console.log(isShowAll)
     const repoContainer = document.getElementById('repo-container')
     
     // clear serach container repo before adding new cards
@@ -84,11 +70,12 @@ const displayRepo = (data, isShowAll) => {
 
     // display show all button if there are more than 12 repo
     const showAllContainer = document.getElementById('show-all-container')
+
     if (data.length > 10 && !isShowAll) {
-        showAllContainer.classList.remove('hidden');
+        showAllContainer.classList.remove('visually-hidden');
     }
     else {
-        showAllContainer.classList.add('hidden');
+        showAllContainer.classList.add('visually-hidden');
     }
     // console.log('is show all', isShowAll)
     // display only first 10 repo if not show All
@@ -100,18 +87,21 @@ const displayRepo = (data, isShowAll) => {
         // console.log(phone);
         // 2 create a div
        
-        console.log(element)
+        // console.log(element)
           // repo
         const repoCard =document.createElement('div');
         repoCard.classList=`card`
         repoCard.style.width = '18rem';
-
+           
         repoCard.innerHTML =`<div class=" card-body">
         <h5 class="card-title">${element.name}</h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">${element.description} </h6>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="card-link">${element.language}</a>
-        <a href="#" class="card-link">Another link</a>
+        <button class="btn btn-primary">${element.language!=null?element.language:'Not Given'}</button>
+        <button class="btn btn-primary">${element.topic=null?element.topic[0]:'Not Given'}</button>
+        
+
+        
       </div>`
       repoContainer.appendChild(repoCard)
     });
@@ -126,21 +116,22 @@ const displayRepo = (data, isShowAll) => {
 
 // handle search button
 const handleSearch = (isShowAll) => {
+  
     toggleLoadingSpinner(true);
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     console.log(searchText);
       loadRepo(searchText, isShowAll);
-      avatarRepo(searchText,isShowAll)
+      avatarRepo(searchText)
       
 }
-// handle search recap
-// const handleSearch2 = () =>{
-//     toggleLoadingSpinner(true);
-//     const searchField = document.getElementById('search-field2');
-//     const searchText = searchField.value;
-//     loadPhone(searchText);
-// }
+const handleSearch2 = () => {
+    toggleLoadingSpinner(true);
+    const searchField = document.getElementById('search-field-repo');
+    const searchText = searchField.value;
+    console.log(searchText);
+    // loadPhone(searchText, isShowAll);
+}
 
 const toggleLoadingSpinner = (isLoading) => {
     const loadingSpinner = document.getElementById('loading-spinner');
@@ -159,3 +150,4 @@ const handleShowAll = () => {
 
 loadRepo();
  avatarRepo()
+ 

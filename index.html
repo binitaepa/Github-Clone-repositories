@@ -12,10 +12,11 @@
     <main class=" mx-auto mt-8">
       <section>
         <div class="input-group container mb-3">
-          <input id="search-field" type="text" class="form-control" placeholder="Github username" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <input id="search-field" type="text" class="form-control" placeholder="Github username (first you have to write valid name to see next pages)" aria-label="Recipient's username" aria-describedby="button-addon2">
           <button onclick="handleSearch()" class="btn btn-primary" type="button" id="button-addon2">Search</button>
         </div>
       </section>
+     
       <section class="">
         <!-- spinner -->
        <section>
@@ -35,11 +36,26 @@
         </div>
        </section>
         
-         <!-- show all button -->
-         <div id="show-all-container" class=" text-center my-8">
-          <button onclick="handleShowAll()" class="btn btn-primary">Show All</button>
-      </div>
+         
       </section>
+      <!-- paginattion -->
+      
+      <nav aria-label="Page navigation example mt-5">
+        <ul class="pagination justify-content-center mt-5">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <!-- show all button -->
+         <div id="show-all-container" class=" text-center my-8">
+          <button onclick="handleShowAll()" class="btn btn-primary">Show Next</button>
+      </div>
+          </li>
+        </ul>
+      </nav>
     </main>
    
    
