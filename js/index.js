@@ -95,8 +95,8 @@ const displayRepo = (data, isShowAll) => {
            
         repoCard.innerHTML =`<div class=" card-body">
         <h5 class="card-title">${element.name}</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">${element.description} </h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <h6 class="card-subtitle mb-2 text-body-secondary">${element.description!=null?element.description:'No description is provided by owner'} </h6>
+        
         <button class="btn btn-primary">${element.language!=null?element.language:'Not Given'}</button>
         <button class="btn btn-primary">${element.topic=null?element.topic[0]:'Not Given'}</button>
         
