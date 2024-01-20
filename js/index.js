@@ -125,13 +125,6 @@ const handleSearch = (isShowAll) => {
       avatarRepo(searchText)
       
 }
-const handleSearch2 = () => {
-    toggleLoadingSpinner(true);
-    const searchField = document.getElementById('search-field-repo');
-    const searchText = searchField.value;
-    console.log(searchText);
-    // loadPhone(searchText, isShowAll);
-}
 
 const toggleLoadingSpinner = (isLoading) => {
     const loadingSpinner = document.getElementById('loading-spinner');
